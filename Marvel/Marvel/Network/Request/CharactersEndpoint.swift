@@ -11,6 +11,7 @@ import Foundation
 enum CharactersEndpoint {
     case characters(offset: Int, limit: Int)
     case character(id: Int)
+    case searchCharacter(byName: String)
 }
 
 extension CharactersEndpoint: Endpoint {
@@ -24,6 +25,8 @@ extension CharactersEndpoint: Endpoint {
             return defaultPath
         case let .character(id):
             return defaultPath + "/\(id)"
+        case .searchCharacter(_):
+            return defaultPath
         }
     }
     
@@ -37,6 +40,9 @@ extension CharactersEndpoint: Endpoint {
             parameters["offset"] = offset
             return .requestParameters(parameters: parameters)
         case .character(_):
+            return .requestParameters(parameters: parameters)
+        case let .searchCharacter(name):
+            parameters["nameStartsWith"] = name
             return .requestParameters(parameters: parameters)
         }
     }

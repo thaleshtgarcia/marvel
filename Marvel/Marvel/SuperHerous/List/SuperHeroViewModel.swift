@@ -33,6 +33,7 @@ struct SuperHeroDTO {
 class SuperHeroViewModel {
     
     var superHeroes: [SuperHeroDTO] = []
+    var searchSuperHeroes: [SuperHeroDTO] = []
     
     //MARK: Public Methods
     func loadSuperHeroes(completion: @escaping () -> Void) {
@@ -47,6 +48,11 @@ class SuperHeroViewModel {
         ImageRequest(imageURL: URL).request { (imageData) in
             completion(imageData)
         }
+    }
+    
+    func searchSuperHero(by name: String, completion: @escaping () -> Void) {
+        self.searchSuperHeroes.removeAll()
+        requestSearchSuperHeroes(by: name, completion: completion)
     }
     
     //MARK: Private Methods
@@ -64,6 +70,24 @@ class SuperHeroViewModel {
             }
             
             self?.superHeroes.append(contentsOf: dtos)
+            completion()
+        }
+    }
+    
+    private func requestSearchSuperHeroes(by name: String, completion: @escaping () -> Void) {
+        CharacterSearchRequest(name: name).request { [weak self] ( result , _) in
+            guard let superHeroesModel = result else {
+                completion()
+                return
+            }
+            
+            var dtos: [SuperHeroDTO] = []
+            for each in superHeroesModel {
+                let dto = SuperHeroDTO(with: each)
+                dtos.append(dto)
+            }
+            
+            self?.searchSuperHeroes.append(contentsOf: dtos)
             completion()
         }
     }
