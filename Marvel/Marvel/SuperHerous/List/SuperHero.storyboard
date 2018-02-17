@@ -18,11 +18,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SuperHeroTableViewCell" rowHeight="195" id="5eU-cA-xmD" customClass="SuperHeroTableViewCell" customModule="Marvel" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SuperHeroTableViewCell" rowHeight="195" id="5eU-cA-xmD" customClass="SuperHeroTableViewCell" customModule="Marvel" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="195"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5eU-cA-xmD" id="9f6-hP-cVS">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="194.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="194.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1dJ-1s-eKy">
@@ -33,25 +33,15 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Hero Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNL-wG-gYw">
-                                            <rect key="frame" x="110" y="15" width="250" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEo-rD-nav">
-                                            <rect key="frame" x="110" y="46" width="250" height="133.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="110" y="55.5" width="216" height="31.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="HNL-wG-gYw" firstAttribute="top" secondItem="9f6-hP-cVS" secondAttribute="top" constant="15" id="3JB-Gt-ibH"/>
-                                        <constraint firstItem="zEo-rD-nav" firstAttribute="leading" secondItem="HNL-wG-gYw" secondAttribute="leading" id="3YM-i2-exk"/>
                                         <constraint firstItem="1dJ-1s-eKy" firstAttribute="top" secondItem="9f6-hP-cVS" secondAttribute="top" constant="15" id="4D8-sx-EhJ"/>
-                                        <constraint firstAttribute="bottom" secondItem="zEo-rD-nav" secondAttribute="bottom" constant="15" id="WZD-yn-Kcf"/>
-                                        <constraint firstItem="zEo-rD-nav" firstAttribute="top" secondItem="HNL-wG-gYw" secondAttribute="bottom" constant="10" id="efa-gB-m86"/>
-                                        <constraint firstAttribute="trailing" secondItem="zEo-rD-nav" secondAttribute="trailing" constant="15" id="oLr-MY-Dle"/>
+                                        <constraint firstItem="HNL-wG-gYw" firstAttribute="centerY" secondItem="1dJ-1s-eKy" secondAttribute="centerY" id="BWJ-AN-0hF"/>
                                         <constraint firstAttribute="trailing" secondItem="HNL-wG-gYw" secondAttribute="trailing" constant="15" id="rLP-4O-ITX"/>
                                         <constraint firstItem="HNL-wG-gYw" firstAttribute="leading" secondItem="1dJ-1s-eKy" secondAttribute="trailing" constant="20" id="ttP-Ks-WwM"/>
                                         <constraint firstItem="1dJ-1s-eKy" firstAttribute="leading" secondItem="9f6-hP-cVS" secondAttribute="leading" constant="15" id="uIN-P3-dJg"/>
@@ -59,7 +49,6 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="descriptionLabel" destination="zEo-rD-nav" id="MWy-Kh-Lfg"/>
                                     <outlet property="nameLabel" destination="HNL-wG-gYw" id="sb4-lq-S07"/>
                                     <outlet property="thumbImageView" destination="1dJ-1s-eKy" id="Nh4-Pd-VS9"/>
                                 </connections>

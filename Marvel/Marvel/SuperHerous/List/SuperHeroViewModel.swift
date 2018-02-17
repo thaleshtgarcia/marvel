@@ -12,13 +12,21 @@ struct SuperHeroDTO {
     var id: Int
     var thumb: String?
     var name: String
-    var description: String
+    var heroDescription: String
+    var comics: [SummaryItem]?
+    var events: [SummaryItem]?
+    var stories: [SummaryItem]?
+    var series: [SummaryItem]?
     
     init(with superHero: SuperHero) {
         id = superHero.id
         name = superHero.name
-        description = superHero.heroDescription
+        heroDescription = superHero.heroDescription
         thumb = superHero.thumb?.fullPath
+        comics = superHero.comics
+        events = superHero.events
+        stories = superHero.stories
+        series = superHero.series
     }
 }
 

@@ -73,7 +73,10 @@ class Network {
     
     func downloadImage(url: URL, completion: @escaping (_ imageData: Data?)->Void) {
     
-        task = URLSession.shared.dataTask(with: url) { data, response, error in
+        let session = URLSession(configuration: .default)
+        session.configuration.requestCachePolicy = .returnCacheDataElseLoad
+        
+        task = session.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else {
                 completion(nil)
                 return
@@ -99,13 +102,15 @@ class Network {
                 serverTime = serverDateString
             }
                         
-            let kuririnHTTPResponse = NetworkHTTPResponse(code: httpResponse.statusCode,
-                                                          data: data,
-                                                          stringServerTime: serverTime,
-                                                          headers: httpResponse.allHeaderFields,
-                                                          serverError: ServerError(json: nil, statusCode: httpResponse.statusCode),
-                                                          requestName: request.requestName)
-            completion(kuririnHTTPResponse)
+            let HTTPResponse = NetworkHTTPResponse(code: httpResponse.statusCode,
+                                                   data: data,
+                                                   stringServerTime: serverTime,
+                                                   headers: httpResponse.allHeaderFields,
+                                                   serverError: ServerError(json: nil, statusCode: httpResponse.statusCode),
+                                                   requestName: request.requestName)
+            print("REQUEST: \(request)")
+            print("JSON RESPONSE: \(String(describing: HTTPResponse.json))")
+            completion(HTTPResponse)
             
             session.finishTasksAndInvalidate()
         }
@@ -133,9 +138,14 @@ class Network {
             
         case let .requestParameters(parameters):
             if case .get = endpoint.method {
-                
-                let pathWithQuery = endpoint.path.appendParametersAsQueryString(parameters: parameters)
-                let path = endpoint.baseURL.appendingPathComponent(pathWithQuery).absoluteString
+            
+                var path = ""
+                if !endpoint.path.isEmpty {
+                    let pathWithQuery = endpoint.path.appendParametersAsQueryString(parameters: parameters)
+                    path = endpoint.baseURL.appendingPathComponent(pathWithQuery).absoluteString
+                } else {
+                     path = endpoint.baseURL.absoluteString.appendParametersAsQueryString(parameters: parameters)
+                }
                 
                 if let decodedPath = path.removingPercentEncoding, let url = URL(string: decodedPath) {
                     return url

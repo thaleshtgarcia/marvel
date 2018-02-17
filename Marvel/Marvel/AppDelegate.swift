@@ -15,16 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return UIWindow()
     }()
     
-    lazy var rootCoordinator: TabBarCoordinator = {
-        guard let window = self.window else { fatalError("Failed to create window") }
-        let coordinator = TabBarCoordinator(window: window)
-        return coordinator
-    }()
+    var rootCoordinator: TabBarCoordinator?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        rootCoordinator.start()
-        window?.makeKeyAndVisible()
+        guard let window = self.window else { fatalError("Failed to create window") }
+        
+        rootCoordinator = TabBarCoordinator(window: window)
+        rootCoordinator?.start()
+        window.makeKeyAndVisible()
+        
+        AppAppearance.setupTabBarAppearance()
+        AppAppearance.setupNavigationAppearance()
         
         return true
     }

@@ -7,12 +7,16 @@
 //
 
 import UIKit
-import Photos
+
+protocol SuperHeroListDelegate: class {
+    func select(superHero: SuperHeroDTO)
+}
 
 class SuperHeroTableViewController: UITableViewController {
     
     var viewModel: SuperHeroViewModel?
     var isLoadingPage: Bool = false
+    weak var heroDelegate: SuperHeroListDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +26,11 @@ class SuperHeroTableViewController: UITableViewController {
                 self?.tableView.reloadData()
             }
         }
+    }
+    
+    func setupViewController(delegate: SuperHeroListDelegate?, viewModel: SuperHeroViewModel) {
+        self.heroDelegate = delegate
+        self.viewModel = viewModel
     }
     
     private func setupTableView() {
@@ -43,16 +52,27 @@ extension SuperHeroTableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SuperHeroTableViewCell") as? SuperHeroTableViewCell,
             let superHero = viewModel?.superHeroes[indexPath.row] else { return UITableViewCell() }
         
+        cell.tag = indexPath.row
+        cell.accessoryType = .disclosureIndicator
         cell.delegate = self
-        cell.setup(with: superHero)
-        
+        cell.setup(with: superHero) { image in
+            DispatchQueue.main.async {
+                if (cell.tag == indexPath.row) {
+                    cell.setImage(image)
+                }
+            }
+        }
         return cell
     }
 }
 
 extension SuperHeroTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        guard let superHero = viewModel?.superHeroes[indexPath.row] else {
+            return
+        }
+        
+        heroDelegate?.select(superHero: superHero)
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -76,7 +96,7 @@ extension SuperHeroTableViewController {
     }
 }
 
-extension SuperHeroTableViewController: SuperHeroTableViewCellDelegate {
+extension SuperHeroTableViewController: LoadImageDelegate {
     
     func load(imageURL: String?, completion: @escaping (UIImage?) -> Void) {
         viewModel?.loadImage(with: imageURL) { imageData in

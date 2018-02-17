@@ -57,7 +57,7 @@ extension Endpoint {
     }
 
     var baseURL: URL {
-        guard let url = URL(string: "https://gateway.marvel.com:443/") else {
+        guard let url = URL(string: "https://gateway.marvel.com:443") else {
             return URL(fileURLWithPath: "")
         }
         return url

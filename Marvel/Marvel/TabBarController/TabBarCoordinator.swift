@@ -15,9 +15,15 @@ class TabBarCoordinator: Coordinator {
     var tabBarController: UITabBarController
     var tabCoordinators: [TabCoordinatorWrapper] = []
     
-    var superHeroCoordinator: SuperHeroCoordinator {
+    lazy var superHeroCoordinator: SuperHeroCoordinator = {
         return SuperHeroCoordinator(with: self)
-    }
+    }()
+    
+    lazy var favouSuperHeroCoordinator: FavouriteSuperHeroCoordinator = {
+        return FavouriteSuperHeroCoordinator()
+    }()
+    
+    var currentCoordinator: TabCoordinatorWrapper?
     
     // MARK: - Initialization methods
     init(window: UIWindow) {
@@ -29,11 +35,14 @@ class TabBarCoordinator: Coordinator {
     func start() {
         self.window.rootViewController = tabBarController
         setupTabs()
+        
     }
     
     // MARK: - Private methods
     private func setupTabs() {
         tabCoordinators.append(TabCoordinatorWrapper.deGenericize(superHeroCoordinator))
+        tabCoordinators.append(TabCoordinatorWrapper.deGenericize(favouSuperHeroCoordinator))
+        
         tabBarController.viewControllers = tabCoordinators.map { $0.rootController }
     }
 }

@@ -10,24 +10,33 @@ import Foundation
 
 enum CharactersEndpoint {
     case characters(offset: Int, limit: Int)
+    case character(id: Int)
 }
 
 extension CharactersEndpoint: Endpoint {
     
     var path: String {
+        
+        let defaultPath = "/v1/public/characters"
+        
         switch self {
         case .characters(_ , _):
-            return "/v1/public/characters"
+            return defaultPath
+        case let .character(id):
+            return defaultPath + "/\(id)"
         }
     }
     
     var task: NetworkTask {
         
+        var parameters = defaultParameters
+        
         switch self {
         case let .characters(offset, limit):
-            var parameters = defaultParameters
             parameters["limit"] = limit
             parameters["offset"] = offset
+            return .requestParameters(parameters: parameters)
+        case .character(_):
             return .requestParameters(parameters: parameters)
         }
     }

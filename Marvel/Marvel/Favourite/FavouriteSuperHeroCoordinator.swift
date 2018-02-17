@@ -1,34 +1,22 @@
 //
-//  SuperHeroCoordinator.swift
+//  FavouriteSuperHeroCoordinator.swift
 //  Marvel
 //
-//  Created by thales.garcia on 11/02/18.
+//  Created by thales.garcia on 15/02/18.
 //  Copyright © 2018 thales.garcia. All rights reserved.
 //
 
 import UIKit
 
-protocol SuperHeroCoordinatorDelegate: class {
-    
-}
-
-class SuperHeroCoordinator: TabCoordinator {
-    
-    private weak var delegate: SuperHeroCoordinatorDelegate?
+class FavouriteSuperHeroCoordinator: TabCoordinator {
     
     var rootController: UINavigationController =  UINavigationController()
     var tabBarItem: UITabBarItem = {
-        let image = UIImage(named: "super-hero-icon")?.withRenderingMode(.alwaysTemplate)
-        let tabBarItem =  UITabBarItem(
-            title: "Heroes",
-            image: image,
-            selectedImage: image)
-
+        let tabBarItem =  UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
         return tabBarItem
     }()
-
-    init(with delegate: SuperHeroCoordinatorDelegate) {
-        self.delegate = delegate
+    
+    init() {
         start()
     }
     
@@ -40,7 +28,7 @@ class SuperHeroCoordinator: TabCoordinator {
         let storyboard = UIStoryboard(name: "SuperHero", bundle: nil)
         if let viewController = storyboard.instantiateInitialViewController() as? SuperHeroTableViewController {
             viewController.setupViewController(delegate: self, viewModel: SuperHeroViewModel())
-            
+            viewController.navigationItem.title = "Favourite Super Heroes"
             rootController.setViewControllers([viewController], animated: true)
             rootController.tabBarItem = tabBarItem
         }
@@ -55,7 +43,7 @@ class SuperHeroCoordinator: TabCoordinator {
     }
 }
 
-extension SuperHeroCoordinator: SuperHeroListDelegate {
+extension FavouriteSuperHeroCoordinator: SuperHeroListDelegate {
     func select(superHero: SuperHeroDTO) {
         showSuperHeroDetailTableViewController(with: superHero)
     }
