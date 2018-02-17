@@ -37,6 +37,7 @@ class SuperHeroViewModel {
     
     //MARK: Public Methods
     func loadSuperHeroes(completion: @escaping () -> Void) {
+        superHeroes.removeAll()
         requestSuperHeroes(offset: 0, completion: completion)
     }
     
