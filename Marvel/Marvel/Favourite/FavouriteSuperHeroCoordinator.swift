@@ -27,8 +27,10 @@ class FavouriteSuperHeroCoordinator: TabCoordinator {
     private func showSuperHeroTableViewController() {
         let storyboard = UIStoryboard(name: "SuperHero", bundle: nil)
         if let viewController = storyboard.instantiateInitialViewController() as? SuperHeroTableViewController {
-            viewController.setupViewController(delegate: self, viewModel: SuperHeroViewModel())
-            viewController.navigationItem.title = "Favourite Super Heroes"
+            
+            let viewModel = FavouriteSuperHeroViewModel(title: "Favourite Super Heroes")
+            viewController.setupViewController(delegate: self, viewModel: viewModel)
+            
             rootController.setViewControllers([viewController], animated: true)
             rootController.tabBarItem = tabBarItem
         }

@@ -25,30 +25,46 @@
                                     <rect key="frame" x="0.0" y="0.0" width="341" height="194.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1dJ-1s-eKy">
-                                            <rect key="frame" x="15" y="15" width="75" height="112"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="not-available" translatesAutoresizingMaskIntoConstraints="NO" id="1dJ-1s-eKy">
+                                            <rect key="frame" x="15" y="41.5" width="75" height="112"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="75" id="Nhy-VV-2KC"/>
                                                 <constraint firstAttribute="height" constant="112" id="dkn-2c-0Jt"/>
                                             </constraints>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B3R-OT-NVV">
+                                            <rect key="frame" x="292" y="75.5" width="44" height="44"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="44" id="7ik-fX-Ljg"/>
+                                                <constraint firstAttribute="height" constant="44" id="NeK-ui-DvF"/>
+                                            </constraints>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" title="Button" image="favourite"/>
+                                            <connections>
+                                                <action selector="favouriteButtonDidTouch" destination="5eU-cA-xmD" eventType="touchUpInside" id="s76-md-ROY"/>
+                                            </connections>
+                                        </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Hero Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNL-wG-gYw">
-                                            <rect key="frame" x="110" y="55.5" width="216" height="31.5"/>
+                                            <rect key="frame" x="110" y="81" width="172" height="32"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="1dJ-1s-eKy" firstAttribute="top" secondItem="9f6-hP-cVS" secondAttribute="top" constant="15" id="4D8-sx-EhJ"/>
-                                        <constraint firstItem="HNL-wG-gYw" firstAttribute="centerY" secondItem="1dJ-1s-eKy" secondAttribute="centerY" id="BWJ-AN-0hF"/>
-                                        <constraint firstAttribute="trailing" secondItem="HNL-wG-gYw" secondAttribute="trailing" constant="15" id="rLP-4O-ITX"/>
+                                        <constraint firstAttribute="trailing" secondItem="B3R-OT-NVV" secondAttribute="trailing" constant="5" id="7dH-Gs-WQZ"/>
+                                        <constraint firstItem="B3R-OT-NVV" firstAttribute="centerY" secondItem="9f6-hP-cVS" secondAttribute="centerY" id="ETy-Ae-4Xp"/>
+                                        <constraint firstItem="HNL-wG-gYw" firstAttribute="centerY" secondItem="9f6-hP-cVS" secondAttribute="centerY" id="MJD-yy-zfo"/>
+                                        <constraint firstItem="B3R-OT-NVV" firstAttribute="leading" secondItem="HNL-wG-gYw" secondAttribute="trailing" constant="10" id="doi-5O-QJw"/>
+                                        <constraint firstItem="1dJ-1s-eKy" firstAttribute="centerY" secondItem="9f6-hP-cVS" secondAttribute="centerY" id="lfE-8d-Yx4"/>
                                         <constraint firstItem="HNL-wG-gYw" firstAttribute="leading" secondItem="1dJ-1s-eKy" secondAttribute="trailing" constant="20" id="ttP-Ks-WwM"/>
                                         <constraint firstItem="1dJ-1s-eKy" firstAttribute="leading" secondItem="9f6-hP-cVS" secondAttribute="leading" constant="15" id="uIN-P3-dJg"/>
                                         <constraint firstAttribute="bottom" secondItem="1dJ-1s-eKy" secondAttribute="bottom" priority="999" constant="15" id="vIb-G4-sni"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="favouriteButton" destination="B3R-OT-NVV" id="Vwi-Bi-IxM"/>
                                     <outlet property="nameLabel" destination="HNL-wG-gYw" id="sb4-lq-S07"/>
                                     <outlet property="thumbImageView" destination="1dJ-1s-eKy" id="Nh4-Pd-VS9"/>
                                 </connections>
@@ -65,4 +81,8 @@
             <point key="canvasLocation" x="-15.199999999999999" y="150.67466266866569"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="favourite" width="626" height="626"/>
+        <image name="not-available" width="150" height="225"/>
+    </resources>
 </document>

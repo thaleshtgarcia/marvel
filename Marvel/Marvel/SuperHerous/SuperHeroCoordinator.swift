@@ -39,10 +39,12 @@ class SuperHeroCoordinator: TabCoordinator {
     private func showSuperHeroTableViewController() {
         let storyboard = UIStoryboard(name: "SuperHero", bundle: nil)
         if let viewController = storyboard.instantiateInitialViewController() as? SuperHeroTableViewController {
-            viewController.setupViewController(delegate: self, viewModel: SuperHeroViewModel())
             
             rootController.setViewControllers([viewController], animated: true)
             rootController.tabBarItem = tabBarItem
+            
+            let viewModel = SuperHeroViewModel(title: "Super Heroes")
+            viewController.setupViewController(delegate: self, viewModel: viewModel)
         }
     }
     

@@ -12,32 +12,50 @@ protocol SuperHeroListDelegate: class {
     func select(superHero: SuperHeroDTO)
 }
 
+public extension NSNotification.Name {
+    public static let superHeroFavourite: String = "superHeroFavourite"
+}
+
 class SuperHeroTableViewController: UITableViewController {
     
     var searchController: UISearchController =  UISearchController(searchResultsController: nil)
-    var viewModel: SuperHeroViewModel?
+    var viewModel: SuperHeroViewModelProtocol?
     var isLoadingPage: Bool = false
-    var isSearching: Bool = false
     
     weak var heroDelegate: SuperHeroListDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Super Heroes"
+        navigationItem.title = viewModel?.navigationTitle ?? ""
         setupTableView()
         setupSearchController()
         showLoading()
-        viewModel?.loadSuperHeroes {
+        viewModel?.loadSuperHeroes(offset: 0, completion: {
             DispatchQueue.main.async { [weak self] in
                 self?.hideLoading()
                 self?.tableView.reloadData()
             }
-        }
+        })
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(reloadTableView),
+                                               name: NSNotification.Name(rawValue: Notification.Name.superHeroFavourite),
+                                               object: nil)
     }
     
-    func setupViewController(delegate: SuperHeroListDelegate?, viewModel: SuperHeroViewModel) {
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func reloadTableView() {
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
+    }
+
+    func setupViewController(delegate: SuperHeroListDelegate?, viewModel: SuperHeroViewModelProtocol?) {
         self.heroDelegate = delegate
-        self.viewModel = viewModel
+        self.viewModel = viewModel 
     }
     
     private func setupTableView() {
@@ -46,7 +64,6 @@ class SuperHeroTableViewController: UITableViewController {
     }
     
     private func setupSearchController() {
-        searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search your Super Hero"
         searchController.searchBar.delegate = self
@@ -54,44 +71,30 @@ class SuperHeroTableViewController: UITableViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
-    
-    //MARK: Search Controller
-    
-    func searchBarIsEmpty() -> Bool {
-        return searchController.searchBar.text?.isEmpty ?? true
-    }
-    
-    func isFiltering() -> Bool {
-        return searchController.isActive && !searchBarIsEmpty()
-    }
 }
 
 //MARK: - UITableViewControlleDataSource
 extension SuperHeroTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         super.tableView(tableView, numberOfRowsInSection: section)
-        let dataSource = isSearching ? viewModel?.searchSuperHeroes : viewModel?.superHeroes
-        
-        return dataSource?.count ?? 0
+        return viewModel?.dataSource.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         super.tableView(tableView, cellForRowAt: indexPath)
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SuperHeroTableViewCell") as? SuperHeroTableViewCell else {
-            return UITableViewCell()
-        }
-        
-        var dataSource = isSearching ? viewModel?.searchSuperHeroes : viewModel?.superHeroes
-
-        guard let superHero = dataSource?[indexPath.row] else {
-            return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SuperHeroTableViewCell") as? SuperHeroTableViewCell,
+              let superHero = viewModel?.dataSource[indexPath.row] else {
+                return UITableViewCell()
         }
         
         cell.tag = indexPath.row
         cell.accessoryType = .disclosureIndicator
+        cell.imageDelegate = self
         cell.delegate = self
-        cell.setup(with: superHero) { image in
+        
+        let isFavourite = viewModel?.isFavouriteSuperHero(superHero: superHero) ?? false
+        cell.setup(with: superHero, isFavourite: isFavourite) { image in
             DispatchQueue.main.async {
                 if (cell.tag == indexPath.row) {
                     cell.setImage(image)
@@ -104,31 +107,25 @@ extension SuperHeroTableViewController {
 
 extension SuperHeroTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if isSearching {
-            guard let superHero = viewModel?.searchSuperHeroes[indexPath.row] else {
-                return
-            }
-            heroDelegate?.select(superHero: superHero)
-        } else {
-            guard let superHero = viewModel?.superHeroes[indexPath.row] else {
-                return
-            }
-            heroDelegate?.select(superHero: superHero)
+
+        guard let superHero = viewModel?.dataSource[indexPath.row] else {
+            return
         }
+        heroDelegate?.select(superHero: superHero)
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        guard let heroesCounter = viewModel?.superHeroes.count else {
+        guard let heroesCounter = viewModel?.dataSource.count, viewModel?.isSearching == false else {
             return
         }
         
-        if indexPath.row >= (heroesCounter - 1) && !isLoadingPage {
+        if indexPath.row >= (heroesCounter - 1) && heroesCounter > 15 && !isLoadingPage {
             let footerView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
             footerView.startAnimating()
             tableView.tableFooterView = footerView
             isLoadingPage = true
-            viewModel?.loadNextPage {
+            loadNextPage {
                 DispatchQueue.main.async { [weak self] in
                     self?.isLoadingPage = false
                     self?.tableView.reloadData()
@@ -136,6 +133,11 @@ extension SuperHeroTableViewController {
                 }
             }
         }
+    }
+    
+    func loadNextPage(completion: @escaping () -> Void) {
+        let offset = viewModel?.dataSource.count ?? 0
+        viewModel?.loadSuperHeroes(offset: offset, completion: completion)
     }
 }
 
@@ -152,19 +154,18 @@ extension SuperHeroTableViewController: LoadImageDelegate {
     }
 }
 
-extension SuperHeroTableViewController: UISearchResultsUpdating {
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        
+extension SuperHeroTableViewController: SuperHeroTableViewCellDelegate {
+    func favouriteSuperHero(superHero: SuperHeroDTO?, isFavourite: Bool) {
+        viewModel?.favouriteSuperHero(superHero: superHero, isFavourite: isFavourite)
     }
 }
 
 extension SuperHeroTableViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         
-        isSearching = false
+        viewModel?.isSearching = false
         showLoading()
-        viewModel?.loadSuperHeroes {
+        viewModel?.loadSuperHeroes(offset: 0) {
             DispatchQueue.main.async { [weak self] in
                 self?.hideLoading()
                 self?.tableView.reloadData()
@@ -177,7 +178,7 @@ extension SuperHeroTableViewController: UISearchBarDelegate {
             return
         }
         
-        isSearching = true
+        viewModel?.isSearching = true
         showLoading()
         viewModel?.searchSuperHero(by: searchText, completion: {
             DispatchQueue.main.async { [weak self] in

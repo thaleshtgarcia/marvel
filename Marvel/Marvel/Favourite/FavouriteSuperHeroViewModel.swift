@@ -1,14 +1,14 @@
 //
-//  SuperHeroViewModel.swift
+//  FavouriteSuperHeroViewModel.swift
 //  Marvel
 //
-//  Created by thales.garcia on 12/02/18.
+//  Created by thales.garcia on 18/02/18.
 //  Copyright © 2018 thales.garcia. All rights reserved.
 //
 
 import Foundation
 
-class SuperHeroViewModel: SuperHeroViewModelProtocol{
+class FavouriteSuperHeroViewModel: SuperHeroViewModelProtocol{
     
     private var superHeroes: [SuperHeroDTO] = []
     private var searchSuperHeroes: [SuperHeroDTO] = []
@@ -37,11 +37,11 @@ class SuperHeroViewModel: SuperHeroViewModelProtocol{
     //MARK: Public Methods
     func loadSuperHeroes(offset: Int = 0, completion: @escaping () -> Void) {
         if offset == 0 {
-            superHeroes.removeAll()
+            retriveSuperHeroes()
         }
-        requestSuperHeroes(offset: offset, completion: completion)
+        completion()
     }
-        
+    
     func loadImage(with URL: String?, completion: @escaping ((Data?) -> Void)) {
         ImageRequest(imageURL: URL).request { (imageData) in
             completion(imageData)
@@ -50,12 +50,12 @@ class SuperHeroViewModel: SuperHeroViewModelProtocol{
     
     func searchSuperHero(by name: String, completion: @escaping () -> Void) {
         self.searchSuperHeroes.removeAll()
-        requestSearchSuperHeroes(by: name, completion: completion)
+        searchSuperHeroes(by: name, completion: completion)
     }
     
     //Favourite Methods
     func favouriteSuperHero(superHero: SuperHeroDTO?, isFavourite: Bool) {
-        
+
         guard let superHeroDTO = superHero else {
             return
         }
@@ -75,53 +75,33 @@ class SuperHeroViewModel: SuperHeroViewModelProtocol{
     
     @objc func refreshSource() {
         favouriteIdsSet = loadAllFavouriteIds()
+        retriveSuperHeroes()
     }
     
     //MARK: Private Methods
-    private func requestSuperHeroes(offset: Int, completion: @escaping () -> Void) {
-        CharactersRequest(offset: offset).request { [weak self] ( result , _) in
-            guard let superHeroesModel = result else {
-                completion()
-                return
-            }
-            
-            var dtos: [SuperHeroDTO] = []
-            for each in superHeroesModel {
-                let dto = SuperHeroDTO(with: each)
-                dtos.append(dto)
-            }
-            
-            self?.superHeroes.append(contentsOf: dtos)
-            completion()
+    private func retriveSuperHeroes() {
+        superHeroes.removeAll()
+        if let favourites = LocalFileCache.loadAll() as? [SuperHero] {
+            superHeroes = favourites.map{ SuperHeroDTO(with: $0) }
         }
     }
     
-    private func requestSearchSuperHeroes(by name: String, completion: @escaping () -> Void) {
-        CharacterSearchRequest(name: name).request { [weak self] ( result , _) in
-            guard let superHeroesModel = result else {
-                completion()
-                return
-            }
-            
-            var dtos: [SuperHeroDTO] = []
-            for each in superHeroesModel {
-                let dto = SuperHeroDTO(with: each)
-                dtos.append(dto)
-            }
-            
-            self?.searchSuperHeroes.append(contentsOf: dtos)
-            completion()
-        }
+    private func searchSuperHeroes(by name: String, completion: @escaping () -> Void) {
+        searchSuperHeroes = superHeroes.filter{ $0.name.contains(name) }
+        completion()
     }
     
     private func persistFavouriteSuperHero(superHero: SuperHero) {
         LocalFileCache.save(object: superHero, fileName: "\(superHero.id)")
         favouriteIdsSet = loadAllFavouriteIds()
+        retriveSuperHeroes()
     }
     
     private func removeFavouriteSuperHero(superHero: SuperHero) {
         LocalFileCache.remove(with:"\(superHero.id)")
         favouriteIdsSet = loadAllFavouriteIds()
+        retriveSuperHeroes()
+        
     }
     
     private func loadAllFavouriteIds() -> Set<Int>{
