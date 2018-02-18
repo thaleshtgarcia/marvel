@@ -107,7 +107,10 @@ extension SuperHeroDetailTableViewController {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: "SuperHeroDetailTableViewCell") as? SuperHeroDetailTableViewCell,
                 let details = viewModel?.superHero else { return UITableViewCell() }
                 
-                cell.setup(superHero: details)
+                cell.delegate = self
+
+                let isFavourite = viewModel?.isFavouriteSuperHero(superHero: details.details) ?? false
+                cell.setup(superHero: details, isFavourite: isFavourite)
                 
                 return cell
             default:
@@ -119,4 +122,12 @@ extension SuperHeroDetailTableViewController {
                 return cell
         }
     }
+}
+
+extension SuperHeroDetailTableViewController: SuperHeroDetailTableViewCellDelegate {
+    func favouriteSuperHero(superHero: SuperHeroDTO?, isFavourite: Bool) {
+        viewModel?.favouriteSuperHero(superHero: superHero, isFavourite: isFavourite)
+    }
+    
+    
 }

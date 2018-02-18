@@ -44,12 +44,24 @@ class SuperHeroDetailViewModel {
     
     var superHero: SuperHeroDetailDTO = SuperHeroDetailDTO()
     var cells: [SuperHeroDetailCellType] = [.superHeroDetail, .comics, .events, .stories, .series]
+    
+    var favouriteIdsSet: Set<Int> = Set()
+    
     var numberOfSections: Int {
         return cells.count
     }
     
     init(with superHero: SuperHeroDTO) {
         self.superHero.details = superHero
+        favouriteIdsSet = loadAllFavouriteIds()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(refreshSource),
+                                               name: NSNotification.Name(rawValue: Notification.Name.superHeroFavourite),
+                                               object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     //MARK: Public Methods
@@ -139,6 +151,33 @@ class SuperHeroDetailViewModel {
         }
     }
     
+    //Favourite Methods
+    func favouriteSuperHero(superHero: SuperHeroDTO?, isFavourite: Bool) {
+        
+        guard let superHeroDTO = superHero else {
+            return
+        }
+        
+        if isFavourite {
+            favouriteIdsSet.insert(superHeroDTO.id)
+            persistFavouriteSuperHero(superHero: superHeroDTO.model())
+        } else {
+            favouriteIdsSet.remove(superHeroDTO.id)
+            removeFavouriteSuperHero(superHero: superHeroDTO.model())
+        }
+    }
+    
+    func isFavouriteSuperHero(superHero: SuperHeroDTO?) -> Bool {
+        guard let superHeroId = superHero?.id else {
+            return false
+        }
+        return favouriteIdsSet.contains(superHeroId)
+    }
+    
+    @objc func refreshSource() {
+        favouriteIdsSet = loadAllFavouriteIds()
+    }
+    
     //MARK: Private Methods
     private func requestCollection(collectionItems: [SummaryItem], completion: @escaping ([JSONDictionary]) -> Void) {
         
@@ -163,5 +202,25 @@ class SuperHeroDetailViewModel {
                 }
             })
         }
+    }
+    
+    private func persistFavouriteSuperHero(superHero: SuperHero) {
+        LocalFileCache.save(object: superHero, fileName: "\(superHero.id)")
+        favouriteIdsSet = loadAllFavouriteIds()
+    }
+    
+    private func removeFavouriteSuperHero(superHero: SuperHero) {
+        LocalFileCache.remove(with:"\(superHero.id)")
+        favouriteIdsSet = loadAllFavouriteIds()
+    }
+    
+    private func loadAllFavouriteIds() -> Set<Int>{
+        
+        if let fileNames: [String] = LocalFileCache.loadAllContentName() {
+            let ids:[Int] = fileNames.map { Int($0) ?? 0}
+            return Set<Int>(ids)
+        }
+        
+        return Set<Int>()
     }
 }
