@@ -108,8 +108,6 @@ class Network {
                                                    headers: httpResponse.allHeaderFields,
                                                    serverError: ServerError(json: nil, statusCode: httpResponse.statusCode),
                                                    requestName: request.requestName)
-            print("REQUEST: \(request)")
-            print("JSON RESPONSE: \(String(describing: HTTPResponse.json))")
             completion(HTTPResponse)
             
             session.finishTasksAndInvalidate()
