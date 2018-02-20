@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB215EDC203B8B68003C4A3C /* TabBarCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB215EDB203B8B68003C4A3C /* TabBarCoordinatorTests.swift */; };
+		CB215EDE203B8EB9003C4A3C /* SuperHeroCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB215EDD203B8EB9003C4A3C /* SuperHeroCoordinatorTests.swift */; };
+		CB215EE2203BA21F003C4A3C /* SuperHeroMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB215EE1203BA21F003C4A3C /* SuperHeroMock.swift */; };
+		CB215EE3203BA4BA003C4A3C /* SuperHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA7433B20332ABB000C4F61 /* SuperHero.swift */; };
+		CB215EE4203BA579003C4A3C /* SummaryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE368672037C25500408441 /* SummaryItem.swift */; };
+		CB215EE5203BA57C003C4A3C /* Serie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE3685F2037A01300408441 /* Serie.swift */; };
+		CB215EE6203BA580003C4A3C /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE3685D2037A00300408441 /* Story.swift */; };
+		CB215EE7203BA584003C4A3C /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE3685B20379FEE00408441 /* Event.swift */; };
+		CB215EE8203BA587003C4A3C /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE3685920379FDC00408441 /* Comic.swift */; };
+		CB215EE9203BA58A003C4A3C /* CollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE368652037B0E700408441 /* CollectionItem.swift */; };
+		CB215EEA203BA58D003C4A3C /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA7433D20332B2A000C4F61 /* Image.swift */; };
+		CB215EEB203BA599003C4A3C /* Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA7433F20344339000C4F61 /* Mappable.swift */; };
+		CB215EF8203BB5E1003C4A3C /* SuperHeroModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB215EF7203BB5E1003C4A3C /* SuperHeroModelTests.swift */; };
+		CB215EFE203BBF17003C4A3C /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB215EFD203BBF17003C4A3C /* ModelTests.swift */; };
+		CB215F00203BBF45003C4A3C /* ModelsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB215EFF203BBF45003C4A3C /* ModelsMock.swift */; };
+		CB215F02203BC6A0003C4A3C /* SuperHeroViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB215F01203BC6A0003C4A3C /* SuperHeroViewModelTests.swift */; };
+		CB215F03203BD13A003C4A3C /* SuperHeroViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8FFD9A2039D99E00C9B5C6 /* SuperHeroViewModelProtocol.swift */; };
 		CB5A45D7203512C10009F939 /* ImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5A45D6203512C10009F939 /* ImageRequest.swift */; };
 		CB8FFD9B2039D99E00C9B5C6 /* SuperHeroViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8FFD9A2039D99E00C9B5C6 /* SuperHeroViewModelProtocol.swift */; };
 		CB8FFD9D2039E06D00C9B5C6 /* FavouriteSuperHeroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8FFD9C2039E06D00C9B5C6 /* FavouriteSuperHeroViewModel.swift */; };
@@ -74,6 +91,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CB215EDB203B8B68003C4A3C /* TabBarCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinatorTests.swift; sourceTree = "<group>"; };
+		CB215EDD203B8EB9003C4A3C /* SuperHeroCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperHeroCoordinatorTests.swift; sourceTree = "<group>"; };
+		CB215EE1203BA21F003C4A3C /* SuperHeroMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperHeroMock.swift; sourceTree = "<group>"; };
+		CB215EF4203BA81E003C4A3C /* libapple_crypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libapple_crypto.tbd; path = usr/lib/libapple_crypto.tbd; sourceTree = SDKROOT; };
+		CB215EF7203BB5E1003C4A3C /* SuperHeroModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperHeroModelTests.swift; sourceTree = "<group>"; };
+		CB215EFD203BBF17003C4A3C /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
+		CB215EFF203BBF45003C4A3C /* ModelsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsMock.swift; sourceTree = "<group>"; };
+		CB215F01203BC6A0003C4A3C /* SuperHeroViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperHeroViewModelTests.swift; sourceTree = "<group>"; };
 		CB5A45D6203512C10009F939 /* ImageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRequest.swift; sourceTree = "<group>"; };
 		CB8FFD9A2039D99E00C9B5C6 /* SuperHeroViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperHeroViewModelProtocol.swift; sourceTree = "<group>"; };
 		CB8FFD9C2039E06D00C9B5C6 /* FavouriteSuperHeroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteSuperHeroViewModel.swift; sourceTree = "<group>"; };
@@ -155,6 +180,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CB215EDF203BA07D003C4A3C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CB215EE0203BA207003C4A3C /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				CB215EE1203BA21F003C4A3C /* SuperHeroMock.swift */,
+				CB215EFF203BBF45003C4A3C /* ModelsMock.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		CB215EF3203BA81E003C4A3C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CB215EF4203BA81E003C4A3C /* libapple_crypto.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CBA0D85220352AE8006AE73B /* Details */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +234,7 @@
 				CBA742F3202F13FC000C4F61 /* MarvelTests */,
 				CBA742FE202F13FC000C4F61 /* MarvelUITests */,
 				CBA742DD202F13FC000C4F61 /* Products */,
+				CB215EF3203BA81E003C4A3C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -222,8 +272,15 @@
 		CBA742F3202F13FC000C4F61 /* MarvelTests */ = {
 			isa = PBXGroup;
 			children = (
+				CB215EE0203BA207003C4A3C /* Mock */,
+				CB215EDF203BA07D003C4A3C /* Resources */,
 				CBA742F4202F13FC000C4F61 /* MarvelTests.swift */,
 				CBA742F6202F13FC000C4F61 /* Info.plist */,
+				CB215EDB203B8B68003C4A3C /* TabBarCoordinatorTests.swift */,
+				CB215EDD203B8EB9003C4A3C /* SuperHeroCoordinatorTests.swift */,
+				CB215EF7203BB5E1003C4A3C /* SuperHeroModelTests.swift */,
+				CB215EFD203BBF17003C4A3C /* ModelTests.swift */,
+				CB215F01203BC6A0003C4A3C /* SuperHeroViewModelTests.swift */,
 			);
 			path = MarvelTests;
 			sourceTree = "<group>";
@@ -526,7 +583,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB215EE3203BA4BA003C4A3C /* SuperHero.swift in Sources */,
+				CB215EEA203BA58D003C4A3C /* Image.swift in Sources */,
+				CB215EE9203BA58A003C4A3C /* CollectionItem.swift in Sources */,
+				CB215EF8203BB5E1003C4A3C /* SuperHeroModelTests.swift in Sources */,
+				CB215F03203BD13A003C4A3C /* SuperHeroViewModelProtocol.swift in Sources */,
+				CB215EE7203BA584003C4A3C /* Event.swift in Sources */,
+				CB215EDC203B8B68003C4A3C /* TabBarCoordinatorTests.swift in Sources */,
+				CB215EFE203BBF17003C4A3C /* ModelTests.swift in Sources */,
+				CB215F02203BC6A0003C4A3C /* SuperHeroViewModelTests.swift in Sources */,
+				CB215EDE203B8EB9003C4A3C /* SuperHeroCoordinatorTests.swift in Sources */,
+				CB215EE4203BA579003C4A3C /* SummaryItem.swift in Sources */,
+				CB215F00203BBF45003C4A3C /* ModelsMock.swift in Sources */,
+				CB215EEB203BA599003C4A3C /* Mappable.swift in Sources */,
+				CB215EE5203BA57C003C4A3C /* Serie.swift in Sources */,
 				CBA742F5202F13FC000C4F61 /* MarvelTests.swift in Sources */,
+				CB215EE8203BA587003C4A3C /* Comic.swift in Sources */,
+				CB215EE2203BA21F003C4A3C /* SuperHeroMock.swift in Sources */,
+				CB215EE6203BA580003C4A3C /* Story.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

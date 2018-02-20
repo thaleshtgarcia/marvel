@@ -16,7 +16,7 @@ class TabBarCoordinator: Coordinator {
     var tabCoordinators: [TabCoordinatorWrapper] = []
     
     lazy var superHeroCoordinator: SuperHeroCoordinator = {
-        return SuperHeroCoordinator(with: self)
+        return SuperHeroCoordinator()
     }()
     
     lazy var favouSuperHeroCoordinator: FavouriteSuperHeroCoordinator = {
@@ -45,8 +45,4 @@ class TabBarCoordinator: Coordinator {
         
         tabBarController.viewControllers = tabCoordinators.map { $0.rootController }
     }
-}
-
-extension TabBarCoordinator: SuperHeroCoordinatorDelegate {
-    
 }

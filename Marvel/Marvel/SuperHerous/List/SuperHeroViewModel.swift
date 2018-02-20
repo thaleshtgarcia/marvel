@@ -10,8 +10,8 @@ import Foundation
 
 class SuperHeroViewModel: SuperHeroViewModelProtocol{
     
-    private var superHeroes: [SuperHeroDTO] = []
-    private var searchSuperHeroes: [SuperHeroDTO] = []
+    var superHeroes: [SuperHeroDTO] = []
+    var searchSuperHeroes: [SuperHeroDTO] = []
     
     var dataSource: [SuperHeroDTO] {
         return isSearching ? searchSuperHeroes : superHeroes

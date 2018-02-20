@@ -72,6 +72,7 @@ extension String {
         return urlEncodedString ?? self
     }
 }
+
 extension String {
     func MD5() -> String {
         let messageData = self.data(using:.utf8)!
@@ -84,8 +85,6 @@ extension String {
         }
         
         return digestData.map { String(format: "%02hhx", $0) }.joined()
-//        return digestData.base64EncodedString()
-//        return String(data: digestData, encoding: .utf8) ?? ""
     }
 }
 

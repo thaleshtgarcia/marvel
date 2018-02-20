@@ -26,6 +26,9 @@ class SuperHeroTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.accessibilityIdentifier = "SuperHeroTableViewController"
+        
         navigationItem.title = viewModel?.navigationTitle ?? ""
         setupTableView()
         setupSearchController()

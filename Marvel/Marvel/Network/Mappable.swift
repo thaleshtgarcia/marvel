@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias JSONDictionary = [String: Any]
+
 protocol Mappable: Codable { }
 
 precedencegroup ExponentiativePrecedence {

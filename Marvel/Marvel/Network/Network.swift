@@ -8,8 +8,6 @@
 
 import Foundation
 
-typealias JSONDictionary = [String: Any]
-
 let defautArrayKey: String = "jsonArray"
 
 enum RequestHTTPMethod {

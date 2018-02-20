@@ -9,28 +9,77 @@
 import XCTest
 
 class MarvelUITests: XCTestCase {
-        
+    
+    var app: XCUIApplication!
+    
     override func setUp() {
         super.setUp()
         
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        removeAllFiles()
         
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        
+        app = XCUIApplication()
+        app.launchArguments.append("--uitesting")
     }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        removeAllFiles()
         super.tearDown()
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testLoadSuperHeroList() {
+        app.launch()
+    
+        let firstCell = app.tables.cells.element(boundBy: 0)
+        let exists = NSPredicate(format: "exists == true")
+        
+        expectation(for: exists, evaluatedWith: firstCell, handler: nil)
+        
+        //Open details of first Hero
+        app.tables.cells.element(boundBy: 0).tap()
+        
+        waitForExpectations(timeout: 5, handler: nil)
+        
+        //Favourite the hero
+        app.tables.cells["SuperHeroDetailTableViewCell"].buttons.firstMatch.tap()
+        
+        //Go back
+        app.navigationBars.buttons.firstMatch.tap()
+        
+        //Tap the favourite tab
+        app.tabBars.buttons["Favorites"].tap()
+        
+        //Open details
+        app.tables.cells.element(boundBy: 0).tap()
     }
     
+    //Private methods
+    fileprivate func removeAllFiles() {
+        guard let cacheDirectoryUrl = documentsDirectoryUrl() else { return }
+        
+        if FileManager.default.fileExists(atPath: cacheDirectoryUrl.relativePath) {
+            _ = try? FileManager.default.removeItem(atPath: cacheDirectoryUrl.relativePath)
+        }
+    }
+
+    fileprivate func documentsDirectoryUrl(with name: String? = nil) -> URL? {
+        guard let documentDirectoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first else { return nil }
+        
+        let customDirectoryURL = documentDirectoryURL.appendingPathComponent("heroes")
+        
+        if FileManager.default.fileExists(atPath: customDirectoryURL.path) == false {
+            do {
+                try FileManager.default.createDirectory(at: customDirectoryURL, withIntermediateDirectories: false, attributes: nil)
+            } catch { }
+        }
+        
+        if let fileName = name {
+            return customDirectoryURL.appendingPathComponent("\(fileName).json")
+        }
+        
+        return customDirectoryURL
+    }
 }
+

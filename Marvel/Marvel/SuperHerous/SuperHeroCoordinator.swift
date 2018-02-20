@@ -8,13 +8,7 @@
 
 import UIKit
 
-protocol SuperHeroCoordinatorDelegate: class {
-    
-}
-
 class SuperHeroCoordinator: TabCoordinator {
-    
-    private weak var delegate: SuperHeroCoordinatorDelegate?
     
     var rootController: UINavigationController =  UINavigationController()
     var tabBarItem: UITabBarItem = {
@@ -26,13 +20,12 @@ class SuperHeroCoordinator: TabCoordinator {
 
         return tabBarItem
     }()
-
-    init(with delegate: SuperHeroCoordinatorDelegate) {
-        self.delegate = delegate
-        start()
+    
+    init() {
+        self.start()
     }
     
-    private func start() {
+    func start() {
         showSuperHeroTableViewController()
     }
     

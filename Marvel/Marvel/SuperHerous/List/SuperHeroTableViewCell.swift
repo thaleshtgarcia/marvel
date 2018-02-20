@@ -25,6 +25,7 @@ class SuperHeroTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        accessibilityIdentifier = "SuperHeroTableViewCell"
     }
     
     func setup(with superHero: SuperHeroDTO, isFavourite: Bool, completion: @escaping (UIImage?) -> Void) {

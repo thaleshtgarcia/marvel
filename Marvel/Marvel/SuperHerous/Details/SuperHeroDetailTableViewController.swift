@@ -17,6 +17,7 @@ class SuperHeroDetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.accessibilityIdentifier = "SuperHeroDetailTableViewController"
         navigationItem.title = viewModel?.superHero.details?.name
         setupTableView()
         loadCollections()

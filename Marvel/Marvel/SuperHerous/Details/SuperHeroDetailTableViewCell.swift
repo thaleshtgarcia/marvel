@@ -22,6 +22,11 @@ class SuperHeroDetailTableViewCell: UITableViewCell {
     weak var delegate: SuperHeroDetailTableViewCellDelegate?
     var superHero: SuperHeroDetailDTO?
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        accessibilityIdentifier = "SuperHeroDetailTableViewCell"
+    }
+    
     func setup(superHero: SuperHeroDetailDTO, isFavourite: Bool) {
         self.superHero = superHero
         thumbImageView.image = UIImage(named: "not-available")
