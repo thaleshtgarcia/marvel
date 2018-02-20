@@ -9,9 +9,8 @@ The app is a simple list of Super Heroes from Marvel. You are able to see the li
 ## Technical Information
 
 - The app was developed in Swift and use MVVM-C as main architecture. 
-- The User Interface wasn't the main concern for this app, however the basic Apple Guide was considered on this development, like size of buttons. 
+- The User Interface wasn't the main concern for this app, however the basic Apple Guide was considered on this development, like size of buttons.
+- The unit tests could coverage more part of the code, however I try to implement tests from different architecutre layers , to demonstrate how testable it is. 
 - Continue on development:
 	* Custom transition between screens
-	* Unit Tests 
-	* UI Tests 
 
