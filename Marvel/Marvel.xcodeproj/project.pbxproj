@@ -24,6 +24,8 @@
 		CB215F00203BBF45003C4A3C /* ModelsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB215EFF203BBF45003C4A3C /* ModelsMock.swift */; };
 		CB215F02203BC6A0003C4A3C /* SuperHeroViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB215F01203BC6A0003C4A3C /* SuperHeroViewModelTests.swift */; };
 		CB215F03203BD13A003C4A3C /* SuperHeroViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8FFD9A2039D99E00C9B5C6 /* SuperHeroViewModelProtocol.swift */; };
+		CB215F05203BE3E0003C4A3C /* FavouriteSuperHeroViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB215F04203BE3E0003C4A3C /* FavouriteSuperHeroViewModelTests.swift */; };
+		CB215F07203BE5A5003C4A3C /* XCTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB215F06203BE5A5003C4A3C /* XCTestHelper.swift */; };
 		CB5A45D7203512C10009F939 /* ImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5A45D6203512C10009F939 /* ImageRequest.swift */; };
 		CB8FFD9B2039D99E00C9B5C6 /* SuperHeroViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8FFD9A2039D99E00C9B5C6 /* SuperHeroViewModelProtocol.swift */; };
 		CB8FFD9D2039E06D00C9B5C6 /* FavouriteSuperHeroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8FFD9C2039E06D00C9B5C6 /* FavouriteSuperHeroViewModel.swift */; };
@@ -33,7 +35,6 @@
 		CBA0D85D20354269006AE73B /* CharacterDetailRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA0D85C20354269006AE73B /* CharacterDetailRequest.swift */; };
 		CBA742E0202F13FC000C4F61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA742DF202F13FC000C4F61 /* AppDelegate.swift */; };
 		CBA742EA202F13FC000C4F61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBA742E8202F13FC000C4F61 /* LaunchScreen.storyboard */; };
-		CBA742F5202F13FC000C4F61 /* MarvelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA742F4202F13FC000C4F61 /* MarvelTests.swift */; };
 		CBA74300202F13FC000C4F61 /* MarvelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA742FF202F13FC000C4F61 /* MarvelUITests.swift */; };
 		CBA743112030501D000C4F61 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA743102030501D000C4F61 /* TabBarCoordinator.swift */; };
 		CBA74318203055AE000C4F61 /* SuperHeroCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA74317203055AE000C4F61 /* SuperHeroCoordinator.swift */; };
@@ -99,6 +100,8 @@
 		CB215EFD203BBF17003C4A3C /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		CB215EFF203BBF45003C4A3C /* ModelsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsMock.swift; sourceTree = "<group>"; };
 		CB215F01203BC6A0003C4A3C /* SuperHeroViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperHeroViewModelTests.swift; sourceTree = "<group>"; };
+		CB215F04203BE3E0003C4A3C /* FavouriteSuperHeroViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteSuperHeroViewModelTests.swift; sourceTree = "<group>"; };
+		CB215F06203BE5A5003C4A3C /* XCTestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestHelper.swift; sourceTree = "<group>"; };
 		CB5A45D6203512C10009F939 /* ImageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRequest.swift; sourceTree = "<group>"; };
 		CB8FFD9A2039D99E00C9B5C6 /* SuperHeroViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperHeroViewModelProtocol.swift; sourceTree = "<group>"; };
 		CB8FFD9C2039E06D00C9B5C6 /* FavouriteSuperHeroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteSuperHeroViewModel.swift; sourceTree = "<group>"; };
@@ -111,7 +114,6 @@
 		CBA742E9202F13FC000C4F61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CBA742EB202F13FC000C4F61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CBA742F0202F13FC000C4F61 /* MarvelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarvelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CBA742F4202F13FC000C4F61 /* MarvelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelTests.swift; sourceTree = "<group>"; };
 		CBA742F6202F13FC000C4F61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CBA742FB202F13FC000C4F61 /* MarvelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarvelUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBA742FF202F13FC000C4F61 /* MarvelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelUITests.swift; sourceTree = "<group>"; };
@@ -274,13 +276,14 @@
 			children = (
 				CB215EE0203BA207003C4A3C /* Mock */,
 				CB215EDF203BA07D003C4A3C /* Resources */,
-				CBA742F4202F13FC000C4F61 /* MarvelTests.swift */,
 				CBA742F6202F13FC000C4F61 /* Info.plist */,
 				CB215EDB203B8B68003C4A3C /* TabBarCoordinatorTests.swift */,
 				CB215EDD203B8EB9003C4A3C /* SuperHeroCoordinatorTests.swift */,
 				CB215EF7203BB5E1003C4A3C /* SuperHeroModelTests.swift */,
 				CB215EFD203BBF17003C4A3C /* ModelTests.swift */,
 				CB215F01203BC6A0003C4A3C /* SuperHeroViewModelTests.swift */,
+				CB215F04203BE3E0003C4A3C /* FavouriteSuperHeroViewModelTests.swift */,
+				CB215F06203BE5A5003C4A3C /* XCTestHelper.swift */,
 			);
 			path = MarvelTests;
 			sourceTree = "<group>";
@@ -585,9 +588,11 @@
 			files = (
 				CB215EE3203BA4BA003C4A3C /* SuperHero.swift in Sources */,
 				CB215EEA203BA58D003C4A3C /* Image.swift in Sources */,
+				CB215F05203BE3E0003C4A3C /* FavouriteSuperHeroViewModelTests.swift in Sources */,
 				CB215EE9203BA58A003C4A3C /* CollectionItem.swift in Sources */,
 				CB215EF8203BB5E1003C4A3C /* SuperHeroModelTests.swift in Sources */,
 				CB215F03203BD13A003C4A3C /* SuperHeroViewModelProtocol.swift in Sources */,
+				CB215F07203BE5A5003C4A3C /* XCTestHelper.swift in Sources */,
 				CB215EE7203BA584003C4A3C /* Event.swift in Sources */,
 				CB215EDC203B8B68003C4A3C /* TabBarCoordinatorTests.swift in Sources */,
 				CB215EFE203BBF17003C4A3C /* ModelTests.swift in Sources */,
@@ -597,7 +602,6 @@
 				CB215F00203BBF45003C4A3C /* ModelsMock.swift in Sources */,
 				CB215EEB203BA599003C4A3C /* Mappable.swift in Sources */,
 				CB215EE5203BA57C003C4A3C /* Serie.swift in Sources */,
-				CBA742F5202F13FC000C4F61 /* MarvelTests.swift in Sources */,
 				CB215EE8203BA587003C4A3C /* Comic.swift in Sources */,
 				CB215EE2203BA21F003C4A3C /* SuperHeroMock.swift in Sources */,
 				CB215EE6203BA580003C4A3C /* Story.swift in Sources */,

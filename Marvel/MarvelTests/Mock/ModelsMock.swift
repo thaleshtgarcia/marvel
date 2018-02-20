@@ -75,4 +75,18 @@ struct SerieMock {
         return object
     }
 }
+
+struct SummaryMock {
+    
+    let resourceURI: String = "http://gateway.marvel.com/v1/public/comics/21366"
+    let name: String = "Avengers: The Initiative (2007) #14"
+   
+    
+    var json: JSONDictionary {
+        
+        let object: JSONDictionary = ["resourceURI": resourceURI,
+                                      "name": name]
+        return object
+    }
+}
      

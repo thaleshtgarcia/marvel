@@ -128,16 +128,32 @@ class ModelsTests: XCTestCase {
         XCTAssertNil(objectModel.thumb)
     }
     
-    func testSummaryInitWrongJSON() {
+    func testSummaryInitSuccess() {
+        
         //given
-        let objectMock: JSONDictionary = ["test":"failed"]
+        let objectMock = SerieMock()
         
         //when
-        let objectModel = SummaryItem(json: objectMock)
+        let objectModel = Serie(json: objectMock.json)
         
         //then
-        XCTAssertEqual(objectModel.resourceURI, "")
-        XCTAssertEqual(objectModel.name, "")
+        XCTAssertEqual(objectModel.id, objectMock.id)
+        XCTAssertEqual(objectModel.title, objectMock.title)
+        XCTAssertNotNil(objectModel.thumb)
+        XCTAssertEqual(objectModel.thumb?.path, objectMock.thumb_path)
+        XCTAssertEqual(objectModel.thumb?.imageExtension, objectMock.thumb_extension)
+    }
+    
+    func testSummaryInitWrongJSON() {
+        //given
+        let objectMock = SummaryMock()
+        
+        //when
+        let objectModel = SummaryItem(json: objectMock.json)
+        
+        //then
+        XCTAssertEqual(objectModel.resourceURI, objectMock.resourceURI)
+        XCTAssertEqual(objectModel.name, objectMock.name)
     }
 }
 

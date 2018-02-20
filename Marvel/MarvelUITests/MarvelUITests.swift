@@ -40,7 +40,7 @@ class MarvelUITests: XCTestCase {
         //Open details of first Hero
         app.tables.cells.element(boundBy: 0).tap()
         
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
         
         //Favourite the hero
         app.tables.cells["SuperHeroDetailTableViewCell"].buttons.firstMatch.tap()
@@ -58,13 +58,13 @@ class MarvelUITests: XCTestCase {
     //Private methods
     fileprivate func removeAllFiles() {
         guard let cacheDirectoryUrl = documentsDirectoryUrl() else { return }
-        
         if FileManager.default.fileExists(atPath: cacheDirectoryUrl.relativePath) {
             _ = try? FileManager.default.removeItem(atPath: cacheDirectoryUrl.relativePath)
         }
     }
 
     fileprivate func documentsDirectoryUrl(with name: String? = nil) -> URL? {
+        
         guard let documentDirectoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first else { return nil }
         
         let customDirectoryURL = documentDirectoryURL.appendingPathComponent("heroes")
